@@ -14,7 +14,9 @@ class storm::params {
 
   $manage_config = true
   $config_template = 'storm/storm.yaml.erb'
-  $config_options = {}
+  $config_options = {
+    'storm.local.dir' => '/var/lib/storm',
+  }
   $log4j_cluster_template = 'storm/log4j2.cluster.xml.erb'
   $log4j_cluster_options = {}
   $log4j_worker_template = 'storm/log4j2.worker.xml.erb'

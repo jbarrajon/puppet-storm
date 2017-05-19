@@ -2,6 +2,13 @@
 class storm::config inherits ::storm {
 
   if $::storm::manage_config {
+    file { $::storm::config_options_final['storm.local.dir'] :
+      ensure => directory,
+      owner  => $::storm::storm_user,
+      group  => $::storm::storm_group,
+      mode   => '0750',
+    }
+
     file { "${::storm::user_home}/apache-storm-${::storm::version}/conf/storm.yaml":
       ensure  => file,
       owner   => $::storm::storm_user,
