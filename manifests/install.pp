@@ -21,8 +21,8 @@ class storm::install inherits ::storm {
   archive { "apache-storm-${::storm::version}.tar.gz":
     path          => "${::storm::user_home}/apache-storm-${::storm::version}.tar.gz",
     source        => "${::storm::download_url}/storm/apache-storm-${::storm::version}/apache-storm-${::storm::version}.tar.gz",
-    checksum_url  => "${::storm::checksum_url}/storm/apache-storm-${::storm::version}/apache-storm-${::storm::version}.tar.gz.sha",
-    checksum_type => 'sha512',
+    #checksum_url  => "${::storm::checksum_url}/storm/apache-storm-${::storm::version}/apache-storm-${::storm::version}.tar.gz.sha",
+    #checksum_type => 'sha512',
     extract       => true,
     extract_path  => $::storm::user_home,
     creates       => "${::storm::user_home}/apache-storm-${::storm::version}",
