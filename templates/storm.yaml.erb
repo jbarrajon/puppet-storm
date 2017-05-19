@@ -1,0 +1,27 @@
+<%-
+  # Convert JSON to YAML representation
+  def recursive_hash_to_output(hash, depth=0)
+    spacer = ""
+    depth.times { spacer += "    "}
+    hash.each do |key, value|
+      if value == ''
+        @output += "\n" + spacer + "# " + key + "\n"
+      elsif value.is_a?(Hash)
+        @output += spacer + key + ":\n"
+        recursive_hash_to_output(value, depth + 1)
+        @output += spacer + "\n"
+      else
+        @output += spacer + key + ": #{value.to_s}\n"
+      end
+    end
+  end
+
+  # Initial string
+  @output = "# --- MANAGED BY PUPPET --- \n"
+
+  if !scope.lookupvar('::storm::config_options_final').empty?
+    @output += "\n"
+    recursive_hash_to_output(scope.lookupvar('::storm::config_options_final'))
+  end
+-%>
+<%= @output -%>

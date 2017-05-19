@@ -1,0 +1,17 @@
+[Unit]
+Description=storm <%= @name %> service
+After=network.target
+
+[Service]
+User=<%= scope.lookupvar('::storm::storm_user') %>
+Group=<%= scope.lookupvar('::storm::storm_group') %>
+ExecStart=<%= scope.lookupvar('::storm::user_home') %>/apache-storm/bin/storm <%= @name %>
+# The regular way for Systemd to stop the daemon is to send SIGTERM (15)
+# to the underlying process spawned by the `ExecStart` script.
+# When done, the underlying process will thus return 15 to its parent script
+# which will itself return 128+15=143 (See `man bash`)
+SuccessExitStatus=143
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
