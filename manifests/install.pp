@@ -16,6 +16,15 @@ class storm::install inherits ::storm {
       managehome => $::storm::manage_home,
       system     => true,
     }
+
+    if $::storm::manage_home {
+      file { $::storm::user_home :
+        ensure => directory,
+        owner  => $::storm::storm_user,
+        group  => $::storm::storm_group,
+        mode   => '0755',
+      }
+    }
   }
 
   archive { "apache-storm-${::storm::version}.tar.gz":
