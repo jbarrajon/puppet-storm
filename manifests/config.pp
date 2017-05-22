@@ -13,7 +13,7 @@ class storm::config inherits ::storm {
       ensure  => file,
       owner   => $::storm::storm_user,
       group   => $::storm::storm_group,
-      mode    => '0440',
+      mode    => '0444',
       content => template($::storm::config_template),
     }
 
@@ -21,7 +21,7 @@ class storm::config inherits ::storm {
       ensure  => file,
       owner   => $::storm::storm_user,
       group   => $::storm::storm_group,
-      mode    => '0440',
+      mode    => '0444',
       content => template($::storm::log4j_cluster_template),
     }
 
@@ -29,7 +29,7 @@ class storm::config inherits ::storm {
       ensure  => file,
       owner   => $::storm::storm_user,
       group   => $::storm::storm_group,
-      mode    => '0440',
+      mode    => '0444',
       content => template($::storm::log4j_worker_template),
     }
   }
