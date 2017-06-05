@@ -57,16 +57,21 @@ class storm::install inherits ::storm {
     target => "${::storm::user_home}/apache-storm/bin/storm",
   }
 
-  file { '/var/log/storm':
+  file { "${::storm::user_home}/storm-logs":
     ensure => directory,
     owner  => $::storm::storm_user,
     group  => $::storm::storm_group,
     mode   => '0755',
   }
 
+  file { '/var/log/storm':
+    ensure => 'link',
+    target => "${::storm::user_home}/storm-logs",
+  }
+
   file { "${::storm::user_home}/apache-storm-${::storm::version}/logs":
     ensure => 'link',
-    target => '/var/log/storm',
+    target => "${::storm::user_home}/storm-logs",
   }
 
 }
